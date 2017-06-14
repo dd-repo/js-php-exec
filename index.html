@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<!-- <form accept-charset="utf-8"> -->
+<!-- 	<input id="command" type="text" name="command" value=""> -->
+<!-- </form> -->
+<div class="screen"></div>
+
+<input type = "text"
+       id = "command"
+	 autofocus
+       onkeydown = "if (event.keyCode == 13)
+			document.getElementById('btnSearch').click()"    
+/>
+
+<input type = "button"
+       id = "btnSearch"
+       value = "Search"
+       onclick = "submit();"
+/>
+
+<!-- <button >Submit</button> -->
+
+<script>
+function submit() {
+	console.log($("#command").val());
+	var command = $('#command').val();
+	console.log(command);
+	$.post("./run.php",
+	{
+	  command: command,
+	},
+	function(data,status){
+		$(".screen").append( data + "<br>" );
+		$("#command").val('')
+	});
+
+}
+</script>
+</body>
+</html>
+
